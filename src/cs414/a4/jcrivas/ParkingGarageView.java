@@ -164,16 +164,47 @@ public class ParkingGarageView extends JFrame
 		                        "Lost ticket fee is $" + cost + ".");
 		            }
 		            if (cost > 0) {
-	                    Object[] paymentOptions = {"Credit Card", "Cash"};
+	                    Object[] paymentOptions = {"Cash", "Credit Card"};
+	                    Object[] cashOptions = {"Sufficient Cash", "Insufficient Cash"};
 
 			            JPanel paymentPanel = new JPanel();
 			            paymentPanel.add(new JLabel("Pay Ticket"));
+			            Boolean paymentApproved = false;
+			            int submitPayment = 0;
 		
 			            int paymentType = JOptionPane.showOptionDialog(null, paymentPanel, "Select payment type",
 			                    JOptionPane.YES_NO_OPTION, JOptionPane.PLAIN_MESSAGE,
 			                    null, paymentOptions, null);
-			            if (paymentType == JOptionPane.YES_OPTION) {
-			            	
+			            if (paymentType == JOptionPane.NO_OPTION) {
+				            submitPayment = JOptionPane.showOptionDialog(null, paymentPanel, "Insert cash",
+				                    JOptionPane.YES_NO_OPTION, JOptionPane.PLAIN_MESSAGE,
+				                    null, paymentOptions, null);	
+			            }
+			            else if (paymentType == JOptionPane.YES_OPTION) {
+				            submitPayment = JOptionPane.showOptionDialog(null, paymentPanel, "Insert cash",
+				                    JOptionPane.YES_NO_OPTION, JOptionPane.PLAIN_MESSAGE,
+				                    null, cashOptions, null);		            	
+			            }
+			            if (submitPayment == JOptionPane.YES_OPTION) {
+			            	controller.payTicket();
+			            	update();
+	                		Object[] exitOptions = {"Exit garage"};
+	                		int n = JOptionPane.showOptionDialog(mainMenu,
+	                				"Thank you for using our garage. Gate is now open. Please exit garage.", 
+	                				"Dispensing ticket", 
+	                				JOptionPane.OK_OPTION,
+	                				JOptionPane.QUESTION_MESSAGE,
+	                				null,
+	                				exitOptions,
+	                				exitOptions[0]
+	                				);
+	                		if (n == JOptionPane.OK_OPTION) {
+	                			controller.closeGate();
+	                			update();
+	                		}
+			            } else {
+	                		JOptionPane.showMessageDialog(mainMenu,
+	                				"Invalid payment. Please contact garage administrator.");
 			            }
 		            }
 		            
@@ -223,37 +254,7 @@ public class ParkingGarageView extends JFrame
 			
 			update();
 		}
-
-
-	  //Called only in createButtonPanel below, to set the attributes of
-	  //  the buttons (their label, font) and add them to the GUI
-	  private void buttonSetup(JPanel  panelForButtons,
-	                           JButton b,
-	                           String  bLabel)
-	  {
-			b.setText(bLabel);
-			b.setFont(buttonFont);
-			panelForButtons.add(b);
-	  }
-	  
-	  
-	  //Creates the entire panel of textfields and buttons (using GridLayout)
-	  //It both creates the buttons (from the controller) and
-	  //  places them in the grid (for the view)
-	  private JPanel createColorPalette(String color,JTextField colorField)
-		{
-			JPanel colorChoose = new JPanel();
-			colorChoose.setLayout(new GridLayout(2,2));
-			
-			colorChoose.add(new JLabel(color));
-//			JButton colorUp = controller.printTicket();
-//			buttonSetup(colorChoose,colorUp,"+10");
-			colorChoose.add(colorField);
-			
-			return colorChoose;
-	  }
-			
-			
+	 			
 	  //When the model changes, it calls update, which determines how to
 	  //  view the model by calling its getRed/getGreen/getBlue methods.
 	  //This seems a bit circular, but it isn't (you need to know

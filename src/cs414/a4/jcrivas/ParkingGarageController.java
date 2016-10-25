@@ -29,62 +29,18 @@ public class ParkingGarageController
 		garage = g;
 	}
 
-  
-  //Build/Return a Color button: it calls the changeColor method in model
-  JButton get(final String color, final int amount)
-  {
-	  JButton b = new JButton();
-	  
-	  b.addActionListener(new ActionListener() {
-		  public void actionPerformed(ActionEvent e)
-		  {
-		     System.out.println("Debug-Controller: " + "Color +10/-10 button pressed (" +
-		                        color+","+amount+")");
-         garage.getAvailability();}
-	  });
-	  
-	  return b;
-  }
-    
-     
-  //Build/Return a JTextField: for entering Numeric Values: it calls the changeColor
-  //  method in model
-  JTextField getColorField(final String color)
-  {
-	  final String     errorMessage = "Enter [0,255]";
-	  final JTextField tf           = new JTextField(errorMessage,5);
-	  
-	  tf.addActionListener(new ActionListener()
-	  {
-	    public void actionPerformed(ActionEvent action)
-	    {
-		    System.out.println("Debug-Controller: " + "Color text field activated (" +
-		                        color+",\""+tf.getText()+"\")");
-//	      garage.selectAction(color,tf.getText());
-	    }
-	  });
-	  
-	  tf.addFocusListener(new FocusAdapter()
-	  {
-	    public void focusLost(FocusEvent event)
-	    {
-		    System.out.println("Debug-Controller: " + "Color text field loses focus (" +
-		                        color+",\""+tf.getText()+"\")");
-//	      garage.changeColorViaTextField(color,tf.getText());
-	    }
-	  });
-
-	  return tf;
-  }
-
 public int printTicket() {
 	garage.openGate();
+	garage.updateOccupancy();
 	int ticket = garage.printTicket();
 	// TODO Auto-generated method stub
 	return ticket;
 }
 
 public void payTicket() {
+	garage.openGate();
+	garage.addAvailableSpot();
+	
 	// TODO Auto-generated method stub
 	
 }
@@ -96,7 +52,6 @@ public void logInAdmin() {
 
 public void closeGate() {
 	garage.closeGate();
-	garage.updateOccupancy();
 	// TODO Auto-generated method stub
 	
 }

@@ -77,6 +77,10 @@ public class ParkingGarage {
 	public void updateOccupancy() {
 		_availableSpots--;
 	}
+	
+	public void addAvailableSpot() {
+		_availableSpots++;
+	}
 
 	public boolean containsTicket(String text) {
 		int ticket = 0;
