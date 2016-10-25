@@ -104,6 +104,7 @@ public class ParkingGarageView extends JFrame
 	    	group.add(radioButtons[i]);
 	    	mainMenu.add(radioButtons[i]);
 	    }
+        radioButtons[0].setSelected(true);
         mainMenuButton = new JButton("Select Option");
         mainMenu.add(mainMenuButton);
         
@@ -167,13 +168,15 @@ public class ParkingGarageView extends JFrame
 
 			            JPanel paymentPanel = new JPanel();
 			            paymentPanel.add(new JLabel("Pay Ticket"));
-//			            JTextField textField = new JTextField(15);
-			            paymentPanel.add(textField);
 		
-			            int paymentType = JOptionPane.showOptionDialog(null, panel, "Select payment type",
+			            int paymentType = JOptionPane.showOptionDialog(null, paymentPanel, "Select payment type",
 			                    JOptionPane.YES_NO_OPTION, JOptionPane.PLAIN_MESSAGE,
 			                    null, paymentOptions, null);
+			            if (paymentType == JOptionPane.YES_OPTION) {
+			            	
+			            }
 		            }
+		            
 
                 } else if (command == logInAdminCommand) {
                     controller.logInAdmin();
