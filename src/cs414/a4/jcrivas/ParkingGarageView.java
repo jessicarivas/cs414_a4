@@ -137,12 +137,13 @@ public class ParkingGarageView extends JFrame
                 	}
 
                 } else if (command == exitGarageCommand) {
-                    Object[] options = {"Submit ticket number", "I lost my ticket"};
+                    Object[] options = {"Submit Ticket Number", "Lost/Invalid Ticket"};
 
 		            JPanel panel = new JPanel();
 		            panel.add(new JLabel("Enter ticket number"));
 		            JTextField textField = new JTextField(15);
 		            panel.add(textField);
+		            int cost = 0;
 		
 		            int result = JOptionPane.showOptionDialog(null, panel, "Exit Garage",
 		                    JOptionPane.YES_NO_OPTION, JOptionPane.PLAIN_MESSAGE,
@@ -152,12 +153,26 @@ public class ParkingGarageView extends JFrame
 		            		JOptionPane.showMessageDialog(mainMenu,
 	                				"Incorrect ticket number. Please try again.");
 		            		} else {
-		            			controller.getTicketCost(textField.getText());
+		            			cost = controller.getTicketCost(textField.getText());
+				            	JOptionPane.showMessageDialog(mainMenu,
+				                        "Total ticket fee is $" + cost + ".");
 		            		}	
 		            } else if (result == JOptionPane.NO_OPTION) {
-		            	int lostTicketFee = controller.getLostTicketFee();
+		            	cost = controller.getLostTicketFee();
 		            	JOptionPane.showMessageDialog(mainMenu,
-		                        "Lost ticket fee is $" + lostTicketFee + ".");
+		                        "Lost ticket fee is $" + cost + ".");
+		            }
+		            if (cost > 0) {
+	                    Object[] paymentOptions = {"Credit Card", "Cash"};
+
+			            JPanel paymentPanel = new JPanel();
+			            paymentPanel.add(new JLabel("Pay Ticket"));
+//			            JTextField textField = new JTextField(15);
+			            paymentPanel.add(textField);
+		
+			            int paymentType = JOptionPane.showOptionDialog(null, panel, "Select payment type",
+			                    JOptionPane.YES_NO_OPTION, JOptionPane.PLAIN_MESSAGE,
+			                    null, paymentOptions, null);
 		            }
 
                 } else if (command == logInAdminCommand) {

@@ -12,4 +12,8 @@ public class Driver {
 		return _ticket.getNumber();
 	}
 
+	public int getTicketCost(int cost) {
+		return _ticket.calculateCost(cost);	
+	}
+
 }

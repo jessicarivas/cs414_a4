@@ -21,7 +21,8 @@ public class Ticket {
 		return _startTime;
 	}
 
-	public int calculateCost(int cost, long endTime) {
+	public int calculateCost(int cost) {
+		long endTime = new java.util.Date().getTime();
 		long difference = endTime - _startTime;
 		long hours = TimeUnit.MILLISECONDS.toHours(difference);
 		int total = (int) (hours * cost);

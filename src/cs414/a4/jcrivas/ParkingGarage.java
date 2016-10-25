@@ -11,6 +11,7 @@ public class ParkingGarage {
 	private Boolean _gateOpen;
 	private int _ticketTracker;
 	private int _lostTicketFee;
+	private int _hourlyCost;
 	Set<Driver> _drivers;
 	Set<Administrator> _admins;
 	
@@ -18,7 +19,8 @@ public class ParkingGarage {
 		_garage = "garage";
 		_totalSpots = 12;
 		_availableSpots = 12;
-		_lostTicketFee = 40;
+		_lostTicketFee = 500;
+		_hourlyCost = 50;
 		_gateOpen = false;
 		_ticketTracker = 0;
 		_drivers = new HashSet<Driver>();
@@ -111,7 +113,7 @@ public class ParkingGarage {
 
 	public int getTicketCost(int ticket) {
 		Driver driver = getDriver(ticket);
-		
-		return 0;
+		int cost = driver.getTicketCost(_hourlyCost);
+		return cost;
 	}
 }
