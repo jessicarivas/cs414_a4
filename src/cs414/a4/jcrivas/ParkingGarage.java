@@ -10,6 +10,7 @@ public class ParkingGarage {
 	private int _availableSpots;
 	private Boolean _gateOpen;
 	private int _ticketTracker;
+	private int _lostTicketFee;
 	Set<Driver> _drivers;
 	Set<Administrator> _admins;
 	
@@ -17,6 +18,7 @@ public class ParkingGarage {
 		_garage = "garage";
 		_totalSpots = 12;
 		_availableSpots = 12;
+		_lostTicketFee = 40;
 		_gateOpen = false;
 		_ticketTracker = 0;
 		_drivers = new HashSet<Driver>();
@@ -62,11 +64,12 @@ public class ParkingGarage {
 			return "closed";
 	}
 	
-	public void printTicket() {
+	public int printTicket() {
 		_ticketTracker++;
 		Driver driver = new Driver(_ticketTracker);
 		_drivers.add(driver);
 		_view.update();
+		return _ticketTracker;
 	}
 
 	public void updateOccupancy() {
@@ -77,15 +80,38 @@ public class ParkingGarage {
 		int ticket = 0;
 		try {
 		    ticket = Integer.parseInt(text);
+		    System.out.println(ticket);
 		} catch (NumberFormatException e) {
 		    return false;
 		}
 		for (Driver driver: _drivers) {
 			int id = driver.getTicketNumber();
+			System.out.println(id);
 			if ((id == ticket)) {
 				return true;
 			}
 		}
-		return true;
+		return false;
+	}
+
+	public int getLostTicketFee() {
+		return _lostTicketFee;
+	}
+	
+	private Driver getDriver(int ticket) {
+		for (Driver driver: _drivers) {
+			int id = driver.getTicketNumber();
+			System.out.println(id);
+			if ((id == ticket)) {
+				return driver;
+			}
+		}
+		return null;
+	}
+
+	public int getTicketCost(int ticket) {
+		Driver driver = getDriver(ticket);
+		
+		return 0;
 	}
 }

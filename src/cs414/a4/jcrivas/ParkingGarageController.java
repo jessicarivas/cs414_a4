@@ -77,10 +77,11 @@ public class ParkingGarageController
 	  return tf;
   }
 
-public JButton printTicket() {
+public int printTicket() {
 	garage.openGate();
+	int ticket = garage.printTicket();
 	// TODO Auto-generated method stub
-	return null;
+	return ticket;
 }
 
 public void payTicket() {
@@ -106,6 +107,21 @@ public boolean getTicket(String text) {
 	}  
 	return false;
 }
+
+public int getLostTicketFee() {
+	return garage.getLostTicketFee();
+}
+
+public int getTicketCost(String id) {
+	int ticket = 0;
+	try {
+	    ticket = Integer.parseInt(id);
+	    System.out.println(ticket);
+	} catch (NumberFormatException e) {
+	}
+	return garage.getTicketCost(ticket);
+}
+
 }
 
 

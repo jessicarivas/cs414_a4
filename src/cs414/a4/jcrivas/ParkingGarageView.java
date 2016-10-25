@@ -118,11 +118,11 @@ public class ParkingGarageView extends JFrame
                 		JOptionPane.showMessageDialog(mainMenu,
                 				"No garage availability. Please come back later.");
                 	} else {
-                		controller.printTicket();
+                		int ticketNumber = controller.printTicket();
                 		update();
                 		Object[] options = {"Enter garage"};
                 		int n = JOptionPane.showOptionDialog(mainMenu,
-                				"Thank you for using our garage. Gate is now open. Please take your ticket and enter garage.", 
+                				"Thank you for using our garage. Your ticket number is: " + ticketNumber  + ". Gate is now open. Please take your ticket and enter garage.", 
                 				"Dispensing ticket", 
                 				JOptionPane.OK_OPTION,
                 				JOptionPane.QUESTION_MESSAGE,
@@ -139,22 +139,27 @@ public class ParkingGarageView extends JFrame
                 } else if (command == exitGarageCommand) {
                     Object[] options = {"Submit ticket number", "I lost my ticket"};
 
+		            JPanel panel = new JPanel();
+		            panel.add(new JLabel("Enter ticket number"));
+		            JTextField textField = new JTextField(15);
+		            panel.add(textField);
+		
+		            int result = JOptionPane.showOptionDialog(null, panel, "Exit Garage",
+		                    JOptionPane.YES_NO_OPTION, JOptionPane.PLAIN_MESSAGE,
+		                    null, options, null);
+		            if (result == JOptionPane.YES_OPTION){
+		            	if (!controller.getTicket(textField.getText())) {
+		            		JOptionPane.showMessageDialog(mainMenu,
+	                				"Incorrect ticket number. Please try again.");
+		            		} else {
+		            			controller.getTicketCost(textField.getText());
+		            		}	
+		            } else if (result == JOptionPane.NO_OPTION) {
+		            	int lostTicketFee = controller.getLostTicketFee();
+		            	JOptionPane.showMessageDialog(mainMenu,
+		                        "Lost ticket fee is $" + lostTicketFee + ".");
+		            }
 
-	            JPanel panel = new JPanel();
-	            panel.add(new JLabel("Enter ticket number"));
-	            JTextField textField = new JTextField(15);
-	            panel.add(textField);
-	
-	            int result = JOptionPane.showOptionDialog(null, panel, "Exit Garage",
-	                    JOptionPane.YES_NO_OPTION, JOptionPane.PLAIN_MESSAGE,
-	                    null, options, null);
-	            if (result == JOptionPane.YES_OPTION){
-	            	if (controller.getTicket(textField.getText()))
-	                JOptionPane.showMessageDialog(null, textField.getText());
-	            }
-
-
-                //yes/no (with customized wording)
                 } else if (command == logInAdminCommand) {
                     controller.logInAdmin();
                 return;
