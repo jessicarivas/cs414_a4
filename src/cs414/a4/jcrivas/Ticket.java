@@ -6,11 +6,16 @@ import java.util.concurrent.TimeUnit;
 public class Ticket {
 
 	private int _ticketNumber;
+	private int _cost;
 	private long _startTime;
+	private long _endTime;
+
 	
-	public Ticket(int id) {
+	public Ticket(int id, int cost) {
 		_ticketNumber = id;
 		_startTime = new java.util.Date().getTime();
+		_endTime = 0;
+		_cost = cost;
 	}
 
 	public int getNumber() {
@@ -21,11 +26,20 @@ public class Ticket {
 		return _startTime;
 	}
 
-	public int calculateCost(int cost) {
-		long endTime = new java.util.Date().getTime();
-		long difference = endTime - _startTime;
+	public long getEndTime() {
+		return _endTime;
+	}
+	
+
+	public int calculateCost() {
+		_endTime = new java.util.Date().getTime();
+		long difference = _endTime - _startTime;
 		long hours = TimeUnit.MILLISECONDS.toSeconds(difference);
-		int total = (int) (hours * cost);
+		int total = (int) (hours * _cost);
 		return total;
+	}
+
+	public int getHourlyCost() {
+		return _cost;
 	}
 }

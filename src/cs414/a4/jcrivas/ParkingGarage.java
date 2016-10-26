@@ -12,8 +12,9 @@ public class ParkingGarage {
 	private int _ticketTracker;
 	private int _lostTicketFee;
 	private int _hourlyCost;
-	Set<Driver> _drivers;
-	Set<Administrator> _admins;
+	private Set<Driver> _drivers;
+	private Set<Administrator> _admins;
+	private FinanceUsage fUsage;
 	
 	public ParkingGarage() {
 		_garage = "garage";
@@ -26,6 +27,7 @@ public class ParkingGarage {
 		_drivers = new HashSet<Driver>();
 		_admins = new HashSet<Administrator>();
 		addAdministrator("admin", "password");
+		fUsage = new FinanceUsage();
 	}
 	
 	public void addAdministrator(String name, String password) {
@@ -69,8 +71,9 @@ public class ParkingGarage {
 	
 	public int printTicket() {
 		_ticketTracker++;
-		Driver driver = new Driver(_ticketTracker);
+		Driver driver = new Driver(_ticketTracker, _hourlyCost);
 		_drivers.add(driver);
+		fUsage.addTransaction(driver.getTicket());
 		_view.update();
 		return _ticketTracker;
 	}
@@ -116,7 +119,7 @@ public class ParkingGarage {
 
 	public int getTicketCost(int ticket) {
 		Driver driver = getDriver(ticket);
-		int cost = driver.getTicketCost(_hourlyCost);
+		int cost = driver.getTicketCost();
 		return cost;
 	}
 
@@ -146,10 +149,14 @@ public class ParkingGarage {
 		} 
 	}
 
-	public void getUsageString(int usageType, int timeFrame) {
-		if (usageType == 0) {
-			
+	public String getUsageString(String typeArray, String timeArray) {
+		String usage = "";
+		if (typeArray == "Finance") {
+			usage = fUsage.getUsage(timeArray);
+		} else if (typeArray == "Occupancy") {
+//			usage = OccupancyUsage.getUsage(timeArray);
 		}
+		return usage;
 		
 	}
 }

@@ -335,11 +335,13 @@ public class ParkingGarageView extends JFrame
 		                    	Object[] timeOptions = {"Hour", "Day", "Week", "Month"};
 					            JPanel panel2 = new JPanel();
 					            panel2.add(new JLabel("Select time range"));
-					
 					            int timeFrame = JOptionPane.showOptionDialog(null, panel, "Garage Usage",
 					                    JOptionPane.DEFAULT_OPTION, JOptionPane.PLAIN_MESSAGE,
 					                    null, timeOptions, null);
+					            System.out.println(usageType);
+					            System.out.println(timeFrame);
 					            String usage = controller.getUsageString(usageType, timeFrame);
+		                		JOptionPane.showMessageDialog(adminMenu, usage);
 		                    }
 				            
 		                }

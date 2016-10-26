@@ -109,8 +109,10 @@ public void changeDriverTotal(String text) {
 }
 
 public String getUsageString(int usageType, int timeFrame) {
-	// TODO Auto-generated method stub
-	return "";
+	String[] typeArray = {"Finance", "Occupancy"};
+	String[] timeArray = {"Hour", "Day", "Week", "Month"};
+	String usage = garage.getUsageString(typeArray[usageType], timeArray[timeFrame]);
+	return usage;
 	
 }
 

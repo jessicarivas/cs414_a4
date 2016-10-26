@@ -4,16 +4,20 @@ public class Driver {
 	
 	private Ticket _ticket;
 	
-	public Driver(int id) {
-		_ticket = new Ticket(id);
+	public Driver(int id, int cost) {
+		_ticket = new Ticket(id, cost);
 	}
 
 	public int getTicketNumber() {
 		return _ticket.getNumber();
 	}
 
-	public int getTicketCost(int cost) {
-		return _ticket.calculateCost(cost);	
+	public int getTicketCost() {
+		return _ticket.calculateCost();	
+	}
+
+	public Ticket getTicket() {
+		return _ticket;
 	}
 
 }
