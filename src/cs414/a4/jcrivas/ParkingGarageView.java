@@ -1,7 +1,5 @@
 package cs414.a4.jcrivas;
 
-
-import javax.swing.BoxLayout;
 import javax.swing.ButtonGroup;
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -11,7 +9,6 @@ import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 import javax.swing.JTextField;
 
-import java.awt.Component;
 import java.awt.Container;
 import java.awt.Color;
 import java.awt.Dimension;
@@ -170,7 +167,6 @@ public class ParkingGarageView extends JFrame
 
 			            JPanel paymentPanel = new JPanel();
 			            paymentPanel.add(new JLabel("Pay Ticket"));
-			            Boolean paymentApproved = false;
 			            int submitPayment = 0;
 		
 			            int paymentType = JOptionPane.showOptionDialog(null, paymentPanel, "Select payment type",
@@ -225,7 +221,6 @@ public class ParkingGarageView extends JFrame
 		            panel.add(new JLabel("Password:"));
 		            JTextField passwordField = new JTextField(15);
 		            panel.add(passwordField);
-		            int cost = 0;
 		
 		            int result = JOptionPane.showOptionDialog(null, panel, "Log In Admin",
 		                    JOptionPane.OK_OPTION, JOptionPane.PLAIN_MESSAGE,
@@ -300,7 +295,7 @@ public class ParkingGarageView extends JFrame
 				            JTextField textField = new JTextField(15);
 				            panel.add(textField);
 				
-				            int result = JOptionPane.showOptionDialog(null, panel, "Enter garage size",
+				            JOptionPane.showOptionDialog(null, panel, "Enter garage size",
 				                    JOptionPane.OK_OPTION, JOptionPane.PLAIN_MESSAGE,
 				                    null, applyOption, null);
 		                	if (controller.isNumber(textField.getText())) {
@@ -331,12 +326,22 @@ public class ParkingGarageView extends JFrame
 		                } else if (command == usageCommand) {
 		                    Object[] occupancyOptions = {"Finance", "Occupancy"};
 				            JPanel panel = new JPanel();
-				            panel.add(new JLabel("Garage Usage"));
+				            panel.add(new JLabel("Select type of reporting"));
 				
-				            int result = JOptionPane.showOptionDialog(null, panel, "Select type of reporting",
-				                    JOptionPane.OK_OPTION, JOptionPane.PLAIN_MESSAGE,
+				            int usageType = JOptionPane.showOptionDialog(null, panel, "Garage Usage",
+				                    JOptionPane.YES_NO_OPTION, JOptionPane.PLAIN_MESSAGE,
 				                    null, occupancyOptions, null);		                	
-		                	
+		                    if (usageType == JOptionPane.YES_OPTION || usageType == JOptionPane.NO_OPTION){
+		                    	Object[] timeOptions = {"Hour", "Day", "Week", "Month"};
+					            JPanel panel2 = new JPanel();
+					            panel2.add(new JLabel("Select time range"));
+					
+					            int timeFrame = JOptionPane.showOptionDialog(null, panel, "Garage Usage",
+					                    JOptionPane.DEFAULT_OPTION, JOptionPane.PLAIN_MESSAGE,
+					                    null, timeOptions, null);
+					            String usage = controller.getUsageString(usageType, timeFrame);
+		                    }
+				            
 		                }
 		            }
 		        });

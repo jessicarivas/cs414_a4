@@ -108,6 +108,12 @@ public void changeDriverTotal(String text) {
 	garage.setTotalDrivers(number);	
 }
 
+public String getUsageString(int usageType, int timeFrame) {
+	// TODO Auto-generated method stub
+	return "";
+	
+}
+
 }
 
 

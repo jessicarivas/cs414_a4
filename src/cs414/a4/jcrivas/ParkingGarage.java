@@ -145,4 +145,11 @@ public class ParkingGarage {
 			_totalDrivers = number;
 		} 
 	}
+
+	public void getUsageString(int usageType, int timeFrame) {
+		if (usageType == 0) {
+			
+		}
+		
+	}
 }
