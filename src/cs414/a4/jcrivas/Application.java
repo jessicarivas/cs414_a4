@@ -1,7 +1,5 @@
 package cs414.a4.jcrivas;
-//Application to build/connect components in the colorCalculator package
-
-//import colorCalculator.*;
+//Application to build/connect components in the garage package
 
 public class Application
 {
@@ -20,6 +18,6 @@ public class Application
 	  
 	  //Build the application, then show it on the screen
 	  view.build();
-		view.show();
+	  view.show();
 	}
 }

@@ -4,7 +4,6 @@ import java.util.HashSet;
 import java.util.Set;
 
 public class ParkingGarage {
-	private String _garage;
 	private ParkingGarageView _view;
 	private int _totalSpots;
 	private int _totalDrivers;
@@ -18,7 +17,6 @@ public class ParkingGarage {
 	private OccupancyUsage oUsage;
 	
 	public ParkingGarage() {
-		_garage = "garage";
 		_totalSpots = 0;
 		_totalDrivers = 0;
 		_lostTicketFee = 500;
@@ -33,7 +31,15 @@ public class ParkingGarage {
 	}
 	
 	public void addAdministrator(String name, String password) {
-		if (!_admins.contains(name)) {
+		Boolean containsAdmin = false;
+		for (Administrator admin: _admins) {
+			String username = admin.getUsername();
+			if ((username == name)) {
+				containsAdmin = true;
+				break;
+			}
+		}
+		if (!containsAdmin) {
 			Administrator admin = new Administrator(name, password);	
 			_admins.add(admin);
 		}
@@ -122,12 +128,9 @@ public class ParkingGarage {
 	}
 
 	public Boolean logInAdmin(String username, String password) {
-		System.out.println(_admins);
 		for (Administrator admin: _admins) {
 			String name = admin.getUsername();
 			String pwd = admin.getPassword();
-			System.out.println(name.equals(username));
-			System.out.println(password.equals(pwd));
 			if ((name.equals(username)) && (password.equals(pwd))) {
 				return true;
 			}

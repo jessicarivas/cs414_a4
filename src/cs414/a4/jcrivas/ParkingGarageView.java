@@ -338,8 +338,6 @@ public class ParkingGarageView extends JFrame
 					            int timeFrame = JOptionPane.showOptionDialog(null, panel, "Garage Usage",
 					                    JOptionPane.DEFAULT_OPTION, JOptionPane.PLAIN_MESSAGE,
 					                    null, timeOptions, null);
-					            System.out.println(usageType);
-					            System.out.println(timeFrame);
 					            String usage = controller.getUsageString(usageType, timeFrame);
 		                		JOptionPane.showMessageDialog(adminMenu, usage);
 		                    }
