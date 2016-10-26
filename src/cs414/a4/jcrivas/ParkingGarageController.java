@@ -31,7 +31,7 @@ public class ParkingGarageController
 
 public int printTicket() {
 	garage.openGate();
-	garage.updateOccupancy();
+	garage.addDriver();
 	int ticket = garage.printTicket();
 	// TODO Auto-generated method stub
 	return ticket;
@@ -39,7 +39,7 @@ public int printTicket() {
 
 public void payTicket() {
 	garage.openGate();
-	garage.addAvailableSpot();
+	garage.removeDriver();
 	
 	// TODO Auto-generated method stub
 	
@@ -68,7 +68,6 @@ public int getTicketCost(String id) {
 	int ticket = 0;
 	try {
 	    ticket = Integer.parseInt(id);
-	    System.out.println(ticket);
 	} catch (NumberFormatException e) {
 	}
 	return garage.getTicketCost(ticket);
@@ -78,6 +77,35 @@ public Boolean logInAdmin(String username, String password) {
 	return (garage.logInAdmin(username, password));
 	// TODO Auto-generated method stub
 	
+}
+
+public boolean isNumber(String text) {
+	int number = 0;
+	try {
+	    number = Integer.parseInt(text);
+	} catch (NumberFormatException e) {
+		return false;
+	}
+	return true;
+}
+
+public void changeGarageOccupancy(String text) {
+	int number = 0;
+	try {
+	    number = Integer.parseInt(text);
+	} catch (NumberFormatException e) {
+	}
+	garage.setTotalOccupancy(number);
+	
+}
+
+public void changeDriverTotal(String text) {
+	int number = 0;
+	try {
+	    number = Integer.parseInt(text);
+	} catch (NumberFormatException e) {
+	}
+	garage.setTotalDrivers(number);	
 }
 
 }

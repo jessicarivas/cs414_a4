@@ -7,7 +7,7 @@ public class ParkingGarage {
 	private String _garage;
 	private ParkingGarageView _view;
 	private int _totalSpots;
-	private int _availableSpots;
+	private int _totalDrivers;
 	private Boolean _gateOpen;
 	private int _ticketTracker;
 	private int _lostTicketFee;
@@ -18,7 +18,7 @@ public class ParkingGarage {
 	public ParkingGarage() {
 		_garage = "garage";
 		_totalSpots = 12;
-		_availableSpots = 12;
+		_totalDrivers = 0;
 		_lostTicketFee = 500;
 		_hourlyCost = 50;
 		_gateOpen = false;
@@ -45,7 +45,7 @@ public class ParkingGarage {
 	}
 
 	public int getAvailability() {
-		return _availableSpots;		
+		return (_totalSpots - _totalDrivers);		
 	}
 	
 	public void addView(ParkingGarageView view) {
@@ -75,12 +75,12 @@ public class ParkingGarage {
 		return _ticketTracker;
 	}
 
-	public void updateOccupancy() {
-		_availableSpots--;
+	public void addDriver() {
+		_totalDrivers++;
 	}
 	
-	public void addAvailableSpot() {
-		_availableSpots++;
+	public void removeDriver() {
+		_totalDrivers--;
 	}
 
 	public boolean containsTicket(String text) {
@@ -107,7 +107,6 @@ public class ParkingGarage {
 	private Driver getDriver(int ticket) {
 		for (Driver driver: _drivers) {
 			int id = driver.getTicketNumber();
-			System.out.println(id);
 			if ((id == ticket)) {
 				return driver;
 			}
@@ -129,10 +128,21 @@ public class ParkingGarage {
 			System.out.println(name.equals(username));
 			System.out.println(password.equals(pwd));
 			if ((name.equals(username)) && (password.equals(pwd))) {
-				System.out.println("found match");
 				return true;
 			}
 		}
 		return false;
+	}
+
+	public void setTotalOccupancy(int number) {
+		if (number >= _totalDrivers) {
+			_totalSpots = number;
+		}
+	}
+
+	public void setTotalDrivers(int number) {
+		if (_totalSpots >= number) {
+			_totalDrivers = number;
+		} 
 	}
 }
