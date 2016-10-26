@@ -21,7 +21,7 @@ public class ParkingGarage {
 		_totalSpots = 12;
 		_totalDrivers = 0;
 		_lostTicketFee = 500;
-		_hourlyCost = 50;
+		_hourlyCost = 1;
 		_gateOpen = false;
 		_ticketTracker = 0;
 		_drivers = new HashSet<Driver>();
