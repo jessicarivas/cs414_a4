@@ -15,6 +15,7 @@ public class ParkingGarage {
 	private Set<Driver> _drivers;
 	private Set<Administrator> _admins;
 	private FinanceUsage fUsage;
+	private OccupancyUsage oUsage;
 	
 	public ParkingGarage() {
 		_garage = "garage";
@@ -28,6 +29,7 @@ public class ParkingGarage {
 		_admins = new HashSet<Administrator>();
 		addAdministrator("admin", "password");
 		fUsage = new FinanceUsage();
+		oUsage = new OccupancyUsage();
 	}
 	
 	public void addAdministrator(String name, String password) {
@@ -74,6 +76,7 @@ public class ParkingGarage {
 		Driver driver = new Driver(_ticketTracker, _hourlyCost);
 		_drivers.add(driver);
 		fUsage.addTransaction(driver.getTicket());
+		oUsage.addTransaction(driver.getTicket());
 		_view.update();
 		return _ticketTracker;
 	}
@@ -90,7 +93,6 @@ public class ParkingGarage {
 		int ticket = 0;
 		try {
 		    ticket = Integer.parseInt(text);
-		    System.out.println(ticket);
 		} catch (NumberFormatException e) {
 		    return false;
 		}
@@ -154,7 +156,7 @@ public class ParkingGarage {
 		if (typeArray == "Finance") {
 			usage = fUsage.getUsage(timeArray);
 		} else if (typeArray == "Occupancy") {
-//			usage = OccupancyUsage.getUsage(timeArray);
+			usage = oUsage.getUsage(timeArray);
 		}
 		return usage;
 		
