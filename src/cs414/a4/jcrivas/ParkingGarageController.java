@@ -46,14 +46,11 @@ public void payTicket() {
 }
 
 public void logInAdmin() {
-	// TODO Auto-generated method stub
 	
 }
 
 public void closeGate() {
 	garage.closeGate();
-	// TODO Auto-generated method stub
-	
 }
 
 public boolean getTicket(String text) {
@@ -75,6 +72,12 @@ public int getTicketCost(String id) {
 	} catch (NumberFormatException e) {
 	}
 	return garage.getTicketCost(ticket);
+}
+
+public Boolean logInAdmin(String username, String password) {
+	return (garage.logInAdmin(username, password));
+	// TODO Auto-generated method stub
+	
 }
 
 }

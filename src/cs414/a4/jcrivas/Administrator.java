@@ -13,4 +13,8 @@ public class Administrator {
 		return _password;
 	}
 
+	public String getUsername() {
+		return _name;
+	}
+
 }

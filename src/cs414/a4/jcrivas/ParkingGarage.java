@@ -30,7 +30,8 @@ public class ParkingGarage {
 	
 	public void addAdministrator(String name, String password) {
 		if (!_admins.contains(name)) {
-			Administrator admin = new Administrator(name, password);			
+			Administrator admin = new Administrator(name, password);	
+			_admins.add(admin);
 		}
 	}
 
@@ -92,7 +93,6 @@ public class ParkingGarage {
 		}
 		for (Driver driver: _drivers) {
 			int id = driver.getTicketNumber();
-			System.out.println(id);
 			if ((id == ticket)) {
 				return true;
 			}
@@ -119,5 +119,20 @@ public class ParkingGarage {
 		Driver driver = getDriver(ticket);
 		int cost = driver.getTicketCost(_hourlyCost);
 		return cost;
+	}
+
+	public Boolean logInAdmin(String username, String password) {
+		System.out.println(_admins);
+		for (Administrator admin: _admins) {
+			String name = admin.getUsername();
+			String pwd = admin.getPassword();
+			System.out.println(name.equals(username));
+			System.out.println(password.equals(pwd));
+			if ((name.equals(username)) && (password.equals(pwd))) {
+				System.out.println("found match");
+				return true;
+			}
+		}
+		return false;
 	}
 }
