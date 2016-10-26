@@ -19,7 +19,7 @@ public class ParkingGarage {
 	
 	public ParkingGarage() {
 		_garage = "garage";
-		_totalSpots = 12;
+		_totalSpots = 0;
 		_totalDrivers = 0;
 		_lostTicketFee = 500;
 		_hourlyCost = 1;
@@ -37,11 +37,6 @@ public class ParkingGarage {
 			Administrator admin = new Administrator(name, password);	
 			_admins.add(admin);
 		}
-	}
-
-	public void enterItem(String id, String qty) {
-		// TODO Auto-generated method stub
-		System.out.println(id);
 	}
 
 	public int getTotalOccupancy() {
@@ -77,16 +72,17 @@ public class ParkingGarage {
 		_drivers.add(driver);
 		fUsage.addTransaction(driver.getTicket());
 		oUsage.addTransaction(driver.getTicket());
-		_view.update();
 		return _ticketTracker;
 	}
 
 	public void addDriver() {
-		_totalDrivers++;
+		if(getAvailability() > 0)
+			_totalDrivers++;
 	}
 	
 	public void removeDriver() {
-		_totalDrivers--;
+		if (_totalDrivers > 0)
+			_totalDrivers--;
 	}
 
 	public boolean containsTicket(String text) {
@@ -140,13 +136,13 @@ public class ParkingGarage {
 	}
 
 	public void setTotalOccupancy(int number) {
-		if (number >= _totalDrivers) {
+		if (number >= _totalDrivers && number > 0) {
 			_totalSpots = number;
 		}
 	}
 
 	public void setTotalDrivers(int number) {
-		if (_totalSpots >= number) {
+		if (_totalSpots >= number && number > 0) {
 			_totalDrivers = number;
 		} 
 	}
