@@ -108,7 +108,8 @@ public class ParkingGarage {
 		}
 		for (Driver driver: _drivers) {
 			int id = driver.getTicketNumber();
-			if ((id == ticket)) {
+			long endDate = driver.getTicket().getEndTime();
+			if ((id == ticket) && (endDate == 0)) { //ticket has not been used yet
 				return true;
 			}
 		}
