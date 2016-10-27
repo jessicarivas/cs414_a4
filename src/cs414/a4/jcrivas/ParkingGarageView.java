@@ -188,7 +188,7 @@ public class ParkingGarageView extends JFrame
 				                    null, cashOptions, null);		            	
 			            }
 			            if (submitPayment == JOptionPane.YES_OPTION) {
-			            	controller.payTicket();
+			            	controller.payTicket(cost);
 			            	update();
 	                		Object[] exitOptions = {"Exit garage"};
 	                		int n = JOptionPane.showOptionDialog(mainMenu,
@@ -257,8 +257,8 @@ public class ParkingGarageView extends JFrame
 					//  referred to in methods called subsequently: buttonSetup)
 					buttonFont = new Font("Monospaced", Font.BOLD, 18);
 			    
-			    //Create a panel to store the textfields and buttons to enter the
-			    //  color values, and put it in on the left of sideBySide.
+			    //Create a panel to store the textfields and buttons to enter
+			    //   values, and put it in on the left of sideBySide.
 			    JPanel adminMenu = new JPanel();
 			    adminMenu.setLayout(new GridLayout(5,1));
 			    adminMenu.add(title);

@@ -15,6 +15,7 @@ public class ParkingGarage {
 	private Set<Administrator> _admins;
 	private FinanceUsage fUsage;
 	private OccupancyUsage oUsage;
+	private Bank _bank;
 	
 	public ParkingGarage() {
 		_totalSpots = 0;
@@ -28,6 +29,7 @@ public class ParkingGarage {
 		addAdministrator("admin", "password");
 		fUsage = new FinanceUsage();
 		oUsage = new OccupancyUsage();
+		_bank = new Bank();
 	}
 	
 	public void addAdministrator(String name, String password) {
@@ -91,6 +93,11 @@ public class ParkingGarage {
 		if (_totalDrivers > 0)
 			_totalDrivers--;
 	}
+	
+	public void payTicket(int payment) {
+		_bank.addPayment(payment);
+		removeDriver();
+	}
 
 	public boolean containsTicket(String text) {
 		int ticket = 0;
@@ -151,12 +158,12 @@ public class ParkingGarage {
 		} 
 	}
 
-	public String getUsageString(String typeArray, String timeArray) {
+	public String getUsageString(String type, String time) {
 		String usage = "";
-		if (typeArray == "Finance") {
-			usage = fUsage.getUsage(timeArray);
-		} else if (typeArray == "Occupancy") {
-			usage = oUsage.getUsage(timeArray);
+		if (type == "Finance") {
+			usage = fUsage.getUsage(time);
+		} else if (type == "Occupancy") {
+			usage = oUsage.getUsage(time);
 		}
 		return usage;
 		

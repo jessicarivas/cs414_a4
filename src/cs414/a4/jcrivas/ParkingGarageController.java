@@ -35,9 +35,9 @@ public int printTicket() {
 	return ticket;
 }
 
-public void payTicket() {
+public void payTicket(int cost) {
 	garage.openGate();
-	garage.removeDriver();
+	garage.payTicket(cost);
 }
 
 public void logInAdmin() {
