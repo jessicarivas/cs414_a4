@@ -32,8 +32,6 @@ class FinanceUsage extends GarageUsage {
 						total += ticket.getHourlyCost() * TimeUnit.MILLISECONDS.toSeconds(endTime - time);
 				}
 			} else if (startTime > time) {
-				System.out.println("in function 2");
-				System.out.println(TimeUnit.MILLISECONDS.toSeconds(now - startTime));
 				total += ticket.getHourlyCost() * TimeUnit.MILLISECONDS.toSeconds(now - startTime);	
 			}
 		}

@@ -29,7 +29,6 @@ public class Ticket {
 	public long getEndTime() {
 		return _endTime;
 	}
-	
 
 	public int calculateCost() {
 		_endTime = new java.util.Date().getTime();

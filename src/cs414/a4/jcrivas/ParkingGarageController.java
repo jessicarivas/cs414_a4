@@ -31,18 +31,13 @@ public class ParkingGarageController
 
 public int printTicket() {
 	garage.openGate();
-	garage.addDriver();
 	int ticket = garage.printTicket();
-	// TODO Auto-generated method stub
 	return ticket;
 }
 
 public void payTicket() {
 	garage.openGate();
 	garage.removeDriver();
-	
-	// TODO Auto-generated method stub
-	
 }
 
 public void logInAdmin() {

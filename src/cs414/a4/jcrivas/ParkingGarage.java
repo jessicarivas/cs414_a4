@@ -73,6 +73,7 @@ public class ParkingGarage {
 	}
 	
 	public int printTicket() {
+		addDriver();
 		_ticketTracker++;
 		Driver driver = new Driver(_ticketTracker, _hourlyCost);
 		_drivers.add(driver);
