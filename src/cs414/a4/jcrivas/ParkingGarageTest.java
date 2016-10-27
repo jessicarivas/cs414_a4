@@ -122,22 +122,6 @@ public class ParkingGarageTest {
 		assertEquals(14, garage.getTotalOccupancy());
 		assertEquals(14, garage.getAvailability());
 	}
-	
-	@Test
-	public void testGarageTickets() {
-		garage.printTicket();
-		assertEquals(true, garage.containsTicket("1"));
-	}
-	
-	@Test
-	public void testGarageTicketNonexistent() {
-		garage.printTicket();
-		assertEquals(false, garage.containsTicket("4"));
-	}
-	
-	@Test
-	public void testGarageLostTicket() {
-		assertEquals(500, garage.getLostTicketFee());
-	}
+
 
 }
