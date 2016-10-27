@@ -17,7 +17,9 @@ public class GarageUsage {
 	
 	public void addTransaction(Ticket ticket) {
 		_tickets.add(ticket);
-		System.out.println(_tickets.size());
 	}
 
+	public Set<Ticket> getTickets() {
+		return _tickets;
+	}
 }

@@ -13,6 +13,7 @@ class OccupancyUsage extends GarageUsage {
 			case "Week": time = WEEK_TO_MILLISECONDS;
 			case "Month": time = MONTH_TO_MILLISECONDS;
 		}
+		if (time == 0) return "Please enter a correct timeframe.";
 		long now  = new java.util.Date().getTime();
 		String usage = "Total occupancy usage for the last " + timeFrame + " is " + findTickets(now, now - time);
 		return usage;

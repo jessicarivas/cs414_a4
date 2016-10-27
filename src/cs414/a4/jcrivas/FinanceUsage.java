@@ -13,6 +13,7 @@ class FinanceUsage extends GarageUsage {
 			case "Week": time = WEEK_TO_MILLISECONDS;
 			case "Month": time = MONTH_TO_MILLISECONDS;
 		}
+		if (time == 0) return "Please enter a correct timeframe.";
 		long now  = new java.util.Date().getTime();
 		String usage = "Total usage for the last " + timeFrame + " is " + findTickets(now, now - time);
 		return usage;
@@ -25,7 +26,6 @@ class FinanceUsage extends GarageUsage {
 			long endTime = ticket.getEndTime();
 			if (endTime != 0) {
 				if (endTime > time){ 
-					System.out.println(TimeUnit.MILLISECONDS.toSeconds(endTime - time));
 					if (startTime > time) 
 						total += ticket.getHourlyCost() * TimeUnit.MILLISECONDS.toSeconds(endTime - startTime);
 					else 

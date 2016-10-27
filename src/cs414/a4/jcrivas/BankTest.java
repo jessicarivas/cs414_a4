@@ -6,8 +6,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 public class BankTest {
-		
-		
+				
 	private ParkingGarage garage;
 	
 	@Before

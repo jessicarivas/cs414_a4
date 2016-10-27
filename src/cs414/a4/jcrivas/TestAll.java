@@ -5,7 +5,7 @@ import org.junit.runners.Suite;
 import junit.framework.JUnit4TestAdapter;
 
 @RunWith(Suite.class)
-@Suite.SuiteClasses({ ParkingGarageTest.class, DriverTest.class})
+@Suite.SuiteClasses({ ParkingGarageTest.class, DriverTest.class, AdministratorTest.class, BankTest.class, TicketTest.class })
 
 //Tests all of the suites.
 public class TestAll {
